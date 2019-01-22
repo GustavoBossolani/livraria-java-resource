@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://java.sun.com/jsf/html"
+	xmlns:j="http://java.sun.com/jsp/jstl/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<f:head>
+	<title>Livros</title>
+
+	<f:body>
+		<b:container fluid="true">
+			<b:form>
+				<b:column>
+
+					<h1 />
+					<f:outputLabel value="Cadastro Livro " style="font-size:30px" />
+					<br />
+
+					<f:outputLabel value="Título:" />
+					<b:inputText value="#{livroBean.livro.titulo}" />
+					<br />
+
+					<f:outputLabel value="Autor:" />
+					<b:inputText value="#{livroBean.livro.autor}" />
+					<br />
+
+					<f:outputLabel value="Ano de Publicação: " />
+					<b:inputText value="#{livroBean.livro.ano}" />
+					<br />
+
+					<f:outputLabel value="Preço:" />
+					<b:inputText value="#{livroBean.livro.preco}"
+						tooltip="Insira o Preço do Livro separando centavor com '.'" />
+					<br />
+
+					<f:outputLabel value="Genêro:" />
+					<b:selectOneMenu value="#{livroBean.livro.genero}">
+						<c:selectItem itemValue="" itemLabel="Selecione um Genero" />
+						<c:selectItem itemValue="Terror" itemLabel="Terror" />
+						<c:selectItem itemValue="Romance" itemLabel="Romance" />
+						<c:selectItem itemValue="Ação" itemLabel="Ação" />
+						<c:selectItem itemValue="Aventura" itemLabel="Aventura" />
+						<c:selectItem itemValue="Ficção Cientifica"
+							itemLabel="Ficção Cientifica" />
+					</b:selectOneMenu>
+					<br />
+					<b:commandButton tooltip="Isso é uma dica :)"
+						action="#{livroBean.grava}" value="Cadastrar Livro"
+						look="primary" size="lg" />
+				</b:column>
+			</b:form>
+		</b:container>
+		
+		<b:column>
+			<b:form>
+			<b:dataTable value="#{livroBean.livros}" var="livro"
+				caption="Livros Registrados">
+
+				<b:dataTableColumn label="Título" value="#{livro.titulo}" />
+				<b:dataTableColumn label="Autor" value="#{livro.autor}" />
+				<b:dataTableColumn label="Ano" value="#{livro.ano}" />
+
+				<b:dataTableColumn label="Preço" value="$ #{livro.preco}">
+					<c:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Preço</li>
+							<li>Unidade</li>
+						</ul>
+					</c:facet>
+				</b:dataTableColumn>
+				<b:dataTableColumn label="Genêro" value="#{livro.genero}" />
+			</b:dataTable>
+			</b:form>
+		</b:column>
+		
+		<!--  Iterando usando um forEach Simples
+			<j:forEach items="${livroBean.livros}" var="livro">
+					${livro.titulo}
+				 	${livro.autor}
+					${livro.ano}
+					${livro.preco}
+					${livro.genero}
+			</j:forEach>
+			-->
+	</f:body>
+</f:head>
+</html>
